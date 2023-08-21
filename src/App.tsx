@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
-//import example from './exemjopa.json'
+import example from './exemjopa.json'
 import './App.css';
+import './App.sass'
 import { getList } from './api';
+import { ListUnit } from './components/ListUnit';
 
 const convertList = (data: any): any[] => {
   return Object.values(data.near_earth_objects).flat().map((x: any) => {
@@ -44,18 +46,20 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      let date = await getList(end, start)
-      setAsteroids(convertList(date))
+      //let date = await getList(end, start)
+      setAsteroids(convertList(example))
     })()
-  }, [end, start])
+  }, [example])
 
   return (
     <div className="App">
-      {asteroids.map((x: any) =>
-        <p>{x.diameter}</p>
-      )}
+      <ListUnit/>
     </div>
   );
 }
 
 export default App;
+
+// {asteroids.map((x: any) =>
+//   <p>{x.name}</p>
+// )}

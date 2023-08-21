@@ -4,6 +4,7 @@ const apiKey = 'DEMO_KEY'
 const listUrl = 'https://api.nasa.gov/neo/rest/v1/feed'
 
 export async function getList(startDate: Date, endDate: Date,) {
+    return
     
     const resp = await axios.get(`${listUrl}?start_date=${formatDate(startDate
         )}&end_date=${formatDate(endDate)}&api_key=${apiKey}`)
