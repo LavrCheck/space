@@ -51,9 +51,19 @@ function App() {
     })()
   }, [example])
 
+
+  console.log(asteroids[1])
+
   return (
     <div className="App">
-      <ListUnit/>
+      <div className='AsteroidsList'>
+        {asteroids.map((x: any) => <ListUnit
+          date={x.maxApproachDate} 
+          distance={x.kilometers}
+          name={x.name}
+          size={x.diameter}
+          />)}
+      </div>
     </div>
   );
 }
@@ -63,3 +73,5 @@ export default App;
 // {asteroids.map((x: any) =>
 //   <p>{x.name}</p>
 // )}
+
+// <ListUnit date={asteroids[0].maxApproachDate}/>

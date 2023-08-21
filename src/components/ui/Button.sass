@@ -1,0 +1,19 @@
+@import '../../globalStyles/colors'
+.Button
+    width: 90px
+    height: 24px
+    border-radius: 16px
+    outline: none
+    border: none
+    color: $white
+    background-color: $orange
+    font-weight: 700
+    font-size: 11px
+    letter-spacing: 1px
+
+    &:hover
+        cursor: pointer
+        background-color: lighten($orange, 10)
+    
+    &:active
+        color: darken($white, 10)
