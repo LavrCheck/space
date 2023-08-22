@@ -6,10 +6,12 @@ export const Button = (
         children,
         style,
         onCLick,
+        big = false,
     } : {
-        children: any
+        children: string
         style?: CSSProperties
         onCLick?: any
+        big?: boolean
     }
 ) =>
-    <button className={`Button`} style={style} onClick={onCLick}>{children}</button>
+    <button className={`Button ${big ? 'big' : ''}`} style={style} onClick={onCLick}>{children}</button>

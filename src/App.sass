@@ -6,14 +6,22 @@
     box-sizing: border-box
 
 .App
-    background: $BackgroundSvg
+    background: black
     width: 100%
     height: 100%
     color: $white
     display: flex
     justify-content: center
     align-items: center
+    position: relative
 
-    .AsteroidsList
-        display: flex
-        flex-direction: column
+    .planet
+        position: fixed
+        left: 0px
+        top: 50%
+        transform: translateY(-50%)
+
+        @media (max-width: 800px)
+            left: -240px
+
+

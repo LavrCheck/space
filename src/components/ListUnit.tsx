@@ -17,10 +17,13 @@ export function ListUnit({
 }) {
     return <>
         <div className='ListUnit'>
+            <div className='TopInfo'>
             <h3>{date}</h3>
+            <img className='Alarm' src={alarmSvg} alt='alarm'/>
+            </div>
             <div className='MiddleInfo'>
                 <div className='MiddleLeft'>
-                    <p>{distance}</p>
+                    <p>{distance} км</p>
                     <img src={arrow} alt='arrow' />
                 </div>
                 <div className='AsteroidDiv'>
@@ -33,7 +36,6 @@ export function ListUnit({
             </div>
             <div className='BottomInfo'>
                 <Button>ЗАКАЗАТЬ</Button>
-                <img src={alarmSvg} alt='alarm'/>
             </div>
         </div>
     </>
