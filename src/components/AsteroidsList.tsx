@@ -11,7 +11,7 @@ const convertList = (data: any): any[] => {
         diameter: Math.floor(x.estimated_diameter.meters.estimated_diameter_max),
         isDangerous: x.is_potentially_hazardous_asteroid,
         lunar: x.close_approach_data[0].miss_distance.lunar.split('.')[0],
-        kilometers: x.close_approach_data[0].miss_distance.kilometers.split('.')[0],
+        kilometers: Number(x.close_approach_data[0].miss_distance.kilometers.split('.')[0]).toLocaleString() + ' км',
         maxApproachDate: convertDate(x.close_approach_data[0].close_approach_date_full.split(' ')[0])
       }
     })
@@ -58,6 +58,7 @@ export function AsteroidsList () {
             distance={x.kilometers}
             name={x.name}
             size={x.diameter}
+            isAlarm={x.isDangerous}
             />)}
         </div>
     )
