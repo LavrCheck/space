@@ -8,15 +8,18 @@ import { ListUnit } from './components/ListUnit';
 import { AsteroidsList } from './components/AsteroidsList';
 import { Basket } from './components/Basket';
 import planet from './Images/planet.png'
-
+import { DiameterSelection } from './components/DiameterSelection';
 
 function App() {
 
   return (
     <div className="App">
       <img src={planet} alt='Planet' className='planet'/>
+      <div className='content'>
+      <DiameterSelection/>
       <AsteroidsList/>
       <Basket/>
+      </div>
     </div>
   );
 }
