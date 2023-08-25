@@ -32,7 +32,11 @@ const convertList = (data: any): any[] => {
       .replace('-Dec-', ' Дек ')
   }
 
-export function AsteroidsList () {
+export function AsteroidsList ({
+    isDistance
+  }:{
+    isDistance: boolean
+  }){
 
     let [asteroids, setAsteroids] = useState<any[]>([])
 
@@ -47,15 +51,13 @@ export function AsteroidsList () {
         setAsteroids(convertList(example))
       })()
     }, [example])
-  
-  
-    console.log(asteroids[1])
-  
+    
+ 
     return (
         <div className='AsteroidsList'>
           {asteroids.map((x: any) => <ListUnit
             date={x.maxApproachDate} 
-            distance={x.kilometers}
+            distance={isDistance ? x.kilometers : x.lunar}
             name={x.name}
             size={x.diameter}
             isAlarm={x.isDangerous}
@@ -64,3 +66,5 @@ export function AsteroidsList () {
     )
 
 }
+
+// distance={x.kilometers}

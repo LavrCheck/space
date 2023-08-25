@@ -12,13 +12,16 @@ import { DiameterSelection } from './components/DiameterSelection';
 
 function App() {
 
+  let [isDistance, setIsDistance] = useState(true)
+
   return (
     <div className="App">
-      <img src={planet} alt='Planet' className='planet'/>
+      <img src={planet} alt='Planet' className='planet' />
       <div className='content'>
-      <DiameterSelection/>
-      <AsteroidsList/>
-      <Basket/>
+        <DiameterSelection isDistance={isDistance}
+          Change={(v: boolean) => setIsDistance(v)} />
+        <AsteroidsList isDistance={isDistance}/>
+        <Basket />
       </div>
     </div>
   );
