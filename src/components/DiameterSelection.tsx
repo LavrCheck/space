@@ -6,7 +6,7 @@ export function DiameterSelection({
     Change,
     }:{
     isDistance : boolean
-    Change: any
+    Change: (value: boolean) => void
     }){ 
 
     const selectedStyle = {fontWeight: '700', textDecoration: 'unset'} 

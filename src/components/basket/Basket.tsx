@@ -1,5 +1,5 @@
 import './Basket.sass'
-import { Button } from './ui/Button'
+import { Button } from '../ui/Button'
 
 export function Basket () {
     return <>

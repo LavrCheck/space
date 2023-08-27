@@ -6,22 +6,22 @@ import './App.sass'
 import { getList } from './api';
 import { ListUnit } from './components/ListUnit';
 import { AsteroidsList } from './components/AsteroidsList';
-import { Basket } from './components/Basket';
+import { Basket } from './components/basket/Basket';
 import planet from './Images/planet.png'
 import { DiameterSelection } from './components/DiameterSelection';
 
-function App() {
+export function App() {
 
   let [isDistance, setIsDistance] = useState(true)
 
   return (
     <div className="App">
       <img src={planet} alt='Planet' className='planet' />
+      <Basket />
       <div className='content'>
         <DiameterSelection isDistance={isDistance}
           Change={(v: boolean) => setIsDistance(v)} />
         <AsteroidsList isDistance={isDistance}/>
-        <Basket />
       </div>
     </div>
   );

@@ -10,12 +10,28 @@ const convertList = (data: any): any[] => {
         name: x.name,
         diameter: Math.floor(x.estimated_diameter.meters.estimated_diameter_max),
         isDangerous: x.is_potentially_hazardous_asteroid,
-        lunar: x.close_approach_data[0].miss_distance.lunar.split('.')[0],
+        lunar:convertLunar( Number(x.close_approach_data[0].miss_distance.lunar.split('.')[0])),
         kilometers: Number(x.close_approach_data[0].miss_distance.kilometers.split('.')[0]).toLocaleString() + ' км',
         maxApproachDate: convertDate(x.close_approach_data[0].close_approach_date_full.split(' ')[0])
       }
     })
   }
+  const convertLunar = (number: number) => {
+    const lastDigit = number % 10;
+    const lastTwoDigits = number % 100;
+  
+    if (
+      (lastTwoDigits >= 11 && lastTwoDigits <= 19) ||
+      lastDigit === 0 ||
+      (lastDigit >= 5 && lastDigit <= 9)
+    ) {
+      return `${number} лунных орбит`;
+    } else if (lastDigit === 1) {
+      return `${number} лунная орбита`;
+    } else {
+      return `${number} лунные орбиты`;
+    }
+  };
   
   const convertDate = (date: string) => {
     return date.replace('-Jan-', ' Янв ')
