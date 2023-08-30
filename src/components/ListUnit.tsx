@@ -61,7 +61,7 @@ export function ListUnit({
                 </div>
             </div>
             <div className='BottomInfo'>
-            <Button onClick={() => { if (choice) { choice() } activeButton()}}
+            <Button onClick={choice}
                 disabled={stateButton}>{childrenButton}</Button>
             </div>
         </div>

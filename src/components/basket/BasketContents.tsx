@@ -7,18 +7,15 @@ export function BasketContents({
 }: {
   selectedAsteroids: object[];
 }) {
-  const [asteroids, setAsteroids] = useState(selectedAsteroids);
 
   function Remove(index: number) {
-    const updatedAsteroids = [...asteroids];
-    updatedAsteroids.splice(index, 1);
-    setAsteroids(updatedAsteroids);
+    selectedAsteroids.splice(index, 1)
   }
 
   return (
     <>
       <div className="BasketContents">
-        {asteroids.map((x: any, index: number) => (
+        {selectedAsteroids.map((x: any, index: number) => (
           <ListUnit
             date={x.maxApproachDate}
             distance={x.kilometers}
