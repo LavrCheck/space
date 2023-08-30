@@ -53,7 +53,7 @@ export function AsteroidsList ({
     selected,
   }:{
     isDistance: boolean
-    selected: any
+    selected: (data: any) => void
   }){
 
     let [asteroids, setAsteroids] = useState<any[]>([])

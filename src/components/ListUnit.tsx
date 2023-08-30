@@ -3,7 +3,7 @@ import arrow from '../Images/arrow.svg'
 import asteroidSvg from '../Images/asteroid.svg'
 import {Button} from '../components/ui/Button'
 import alarmSvg from '../Images/alarm.svg'
-import { CSSProperties } from 'react'
+import { CSSProperties, useState } from 'react'
 
 export function ListUnit({
     date,
@@ -20,11 +20,22 @@ export function ListUnit({
     size: number
     isAlarm: boolean
     style?: CSSProperties
-    choice?: any
+    choice?: () => void 
 }) {
+
     function isAsteroidBig (){
         if (size > 250) {return {height: '50px', width: '50px'}}
         else {return {}}
+    }
+
+    const [stateButton, setStateButton] = useState(false)
+    const [childrenButton, setChildrenButton] = useState('ЗАКАЗАТЬ')
+    function activeButton () {
+        if (!stateButton) {
+            setChildrenButton('В КОРЗИНЕ')
+            setStateButton(!stateButton)
+        }
+
     }
 
 
@@ -50,10 +61,12 @@ export function ListUnit({
                 </div>
             </div>
             <div className='BottomInfo'>
-                <Button onCLick={choice}>ЗАКАЗАТЬ</Button>
+            <Button onClick={() => { if (choice) { choice() } activeButton()}}
+                disabled={stateButton}>{childrenButton}</Button>
             </div>
         </div>
     </>
 } 
 
 // <h5>Ø 225 м</h5> 
+// <Button onClick={() => { if (choice) { choice() } activeButton() }}

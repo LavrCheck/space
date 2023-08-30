@@ -14,8 +14,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
-  let [isDistance, setIsDistance] = useState(true)
-  let [selectedAsteroids, setSelectedAsteroids] = useState([])
+  let [isDistance, setIsDistance] = useState<boolean>(true)
+  let [selectedAsteroids, setSelectedAsteroids] = useState<object[]>([])
 
 
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path='/' element={
           <div className="App">
             <img src={planet} alt='Planet' className='planet' />
-            <Basket />
+            <Basket selectedAsteroids={selectedAsteroids}/>
             <div className='content'>
               <DiameterSelection isDistance={isDistance}
                 Change={(v: boolean) => setIsDistance(v)} />
@@ -37,6 +37,8 @@ function App() {
           <div className='App'>
             <img src={planet} alt='Planet' className='planet' />
             <div className='content'>
+              <DiameterSelection isDistance={isDistance}
+                Change={(v:boolean) => setIsDistance(v)} />
               <BasketContents selectedAsteroids={selectedAsteroids}/>
             </div>
           </div>
