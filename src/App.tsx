@@ -7,23 +7,42 @@ import { getList } from './api';
 import { ListUnit } from './components/ListUnit';
 import { AsteroidsList } from './components/AsteroidsList';
 import { Basket } from './components/basket/Basket';
+import { BasketContents } from './components/basket/BasketContents';
 import planet from './Images/planet.png'
 import { DiameterSelection } from './components/DiameterSelection';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-export function App() {
+function App() {
 
   let [isDistance, setIsDistance] = useState(true)
+  let [selectedAsteroids, setSelectedAsteroids] = useState([])
+
 
   return (
-    <div className="App">
-      <img src={planet} alt='Planet' className='planet' />
-      <Basket />
-      <div className='content'>
-        <DiameterSelection isDistance={isDistance}
-          Change={(v: boolean) => setIsDistance(v)} />
-        <AsteroidsList isDistance={isDistance}/>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={
+          <div className="App">
+            <img src={planet} alt='Planet' className='planet' />
+            <Basket />
+            <div className='content'>
+              <DiameterSelection isDistance={isDistance}
+                Change={(v: boolean) => setIsDistance(v)} />
+              <AsteroidsList isDistance={isDistance}
+                selected={(x: any) => { setSelectedAsteroids(selectedAsteroids.concat(x)); console.log(selectedAsteroids) } }/>
+            </div>
+          </div>} />
+
+        <Route path='/basket' element={
+          <div className='App'>
+            <img src={planet} alt='Planet' className='planet' />
+            <div className='content'>
+              <BasketContents selectedAsteroids={selectedAsteroids}/>
+            </div>
+          </div>
+        } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

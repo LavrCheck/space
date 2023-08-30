@@ -12,6 +12,7 @@ export function ListUnit({
     size,
     isAlarm,
     style,
+    choice,
 }:{
     date: string
     distance: number
@@ -19,6 +20,7 @@ export function ListUnit({
     size: number
     isAlarm: boolean
     style?: CSSProperties
+    choice?: any
 }) {
     function isAsteroidBig (){
         if (size > 250) {return {height: '50px', width: '50px'}}
@@ -48,10 +50,10 @@ export function ListUnit({
                 </div>
             </div>
             <div className='BottomInfo'>
-                <Button>ЗАКАЗАТЬ</Button>
+                <Button onCLick={choice}>ЗАКАЗАТЬ</Button>
             </div>
         </div>
     </>
-}
+} 
 
-// <h5>Ø 225 м</h5>
+// <h5>Ø 225 м</h5> 

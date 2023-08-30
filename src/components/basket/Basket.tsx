@@ -1,5 +1,6 @@
 import './Basket.sass'
 import { Button } from '../ui/Button'
+import { Link } from 'react-router-dom'
 
 export function Basket () {
     return <>
@@ -8,7 +9,7 @@ export function Basket () {
                 <h2>Корзина</h2>
                 <p>2 товара</p>
             </div>
-        <Button big={true}>В корзину</Button>
+        <Link to='/basket'> <Button big={true}>В корзину</Button> </Link>
         </div>    
     </>
 }

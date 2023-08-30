@@ -49,9 +49,11 @@ const convertList = (data: any): any[] => {
   }
 
 export function AsteroidsList ({
-    isDistance
+    isDistance,
+    selected,
   }:{
     isDistance: boolean
+    selected: any
   }){
 
     let [asteroids, setAsteroids] = useState<any[]>([])
@@ -67,7 +69,7 @@ export function AsteroidsList ({
         setAsteroids(convertList(example))
       })()
     }, [example])
-    
+
  
     return (
         <div className='AsteroidsList'>
@@ -77,6 +79,7 @@ export function AsteroidsList ({
             name={x.name}
             size={x.diameter}
             isAlarm={x.isDangerous}
+            choice={() => selected(x) }
             />)}
         </div>
     )
@@ -84,3 +87,5 @@ export function AsteroidsList ({
 }
 
 // distance={x.kilometers}
+// choice={() => setSelectedAsteroids(selectedAsteroids.concat(x)) }
+
