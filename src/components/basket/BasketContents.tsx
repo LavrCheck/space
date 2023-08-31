@@ -4,13 +4,13 @@ import { useState } from 'react';
 
 export function BasketContents({
   selectedAsteroids,
+  remove
 }: {
   selectedAsteroids: object[];
+  remove: any
 }) {
 
-  function Remove(index: number) {
-    selectedAsteroids.splice(index, 1)
-  }
+
 
   return (
     <>
@@ -22,7 +22,7 @@ export function BasketContents({
             name={x.name}
             size={x.diameter}
             isAlarm={x.isDangerous}
-            choice={() => Remove(index)}
+            choice={() => remove(index)}
           />
         ))}
       </div>
