@@ -80,6 +80,7 @@ export function AsteroidsList ({
             size={x.diameter}
             isAlarm={x.isDangerous}
             choice={() => selected(x) }
+            childrenButton={'ЗАКАЗАТЬ'}
             />)}
         </div>
     )

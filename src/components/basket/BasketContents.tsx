@@ -24,6 +24,7 @@ export function BasketContents({
             isAlarm={x.isDangerous}
             choice={() => remove(x.name)}
             active={false}
+            childrenButton={'УДАЛИТЬ'}
           />
         ))}
       </div>
