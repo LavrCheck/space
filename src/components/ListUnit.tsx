@@ -13,6 +13,7 @@ export function ListUnit({
     isAlarm,
     style,
     choice,
+    active = true,
 }:{
     date: string
     distance: number
@@ -20,7 +21,8 @@ export function ListUnit({
     size: number
     isAlarm: boolean
     style?: CSSProperties
-    choice?: () => void 
+    choice?: () => void
+    active?: boolean
 }) {
 
     function isAsteroidBig (){
@@ -61,7 +63,7 @@ export function ListUnit({
                 </div>
             </div>
             <div className='BottomInfo'>
-            <Button onClick={choice}
+            <Button onClick={() => { if (choice) { choice() } if(active) {activeButton()} }}
                 disabled={stateButton}>{childrenButton}</Button>
             </div>
         </div>

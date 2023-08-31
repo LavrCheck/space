@@ -15,14 +15,15 @@ export function BasketContents({
   return (
     <>
       <div className="BasketContents">
-        {selectedAsteroids.map((x: any, index: number) => (
+        {selectedAsteroids.map((x: any,) => (
           <ListUnit
             date={x.maxApproachDate}
             distance={x.kilometers}
             name={x.name}
             size={x.diameter}
             isAlarm={x.isDangerous}
-            choice={() => remove(index)}
+            choice={() => remove(x.name)}
+            active={false}
           />
         ))}
       </div>

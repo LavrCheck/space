@@ -15,7 +15,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
 
   let [isDistance, setIsDistance] = useState<boolean>(true)
-  let [selectedAsteroids, setSelectedAsteroids] = useState([])
+  let [selectedAsteroids, setSelectedAsteroids] = useState<any[]>([])
 
 
   return (
@@ -29,7 +29,7 @@ function App() {
               <DiameterSelection isDistance={isDistance}
                 Change={(v: boolean) => setIsDistance(v)} />
               <AsteroidsList isDistance={isDistance}
-                selected={(x: any) => { setSelectedAsteroids(selectedAsteroids.concat(x)); console.log(selectedAsteroids) } }/>
+                selected={(x: any) => { let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal)} }/>
             </div>
           </div>} />
 
@@ -40,7 +40,7 @@ function App() {
               <DiameterSelection isDistance={isDistance}
                 Change={(v:boolean) => setIsDistance(v)} />
               <BasketContents selectedAsteroids={selectedAsteroids}
-                remove={(index: any)=>{ console.log(index); setSelectedAsteroids(selectedAsteroids.splice(index, 1))}}/>
+                remove={(name: any)=>{ setSelectedAsteroids([...selectedAsteroids.filter(x=> x.name !== name)])}}/>
             </div>
           </div>
         } />
