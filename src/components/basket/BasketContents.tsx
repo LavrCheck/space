@@ -22,7 +22,7 @@ export function BasketContents({
             name={x.name}
             size={x.diameter}
             isAlarm={x.isDangerous}
-            choice={() => remove(index)}
+            choice={() => remove(x.name)}
           />
         ))}
       </div>
