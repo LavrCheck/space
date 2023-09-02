@@ -51,9 +51,11 @@ const convertList = (data: any): any[] => {
 export function AsteroidsList ({
     isDistance,
     selected,
+    selectedAsteroids,
   }:{
     isDistance: boolean
     selected: (data: any) => void
+    selectedAsteroids: any
   }){
 
     let [asteroids, setAsteroids] = useState<any[]>([])
@@ -81,6 +83,7 @@ export function AsteroidsList ({
             isAlarm={x.isDangerous}
             choice={() => selected(x) }
             childrenButton={'ЗАКАЗАТЬ'}
+            isAsteroidSelected={selectedAsteroids.some((a: { name: any; }) => a.name === x.name)}
             />)}
         </div>
     )

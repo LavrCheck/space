@@ -15,7 +15,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
 
   let [isDistance, setIsDistance] = useState<boolean>(true)
-  let [isSelected, setIsSelected] = useState<boolean>(true)
 
   const [selectedAsteroids, setSelectedAsteroids] = useState(
     () => {
@@ -42,6 +41,7 @@ function App() {
                 selected={(x: any) => {
                   if (!selectedAsteroids.some((a: { name: any; }) => a.name === x.name)) { let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal) }
                 }}
+                selectedAsteroids = {selectedAsteroids}
               />
             </div>
           </div>} />

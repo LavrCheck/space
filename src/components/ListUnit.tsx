@@ -15,6 +15,7 @@ export function ListUnit({
     choice,
     active = true,
     childrenButton,
+    isAsteroidSelected = false
 }: {
     date: string
     distance: number
@@ -25,6 +26,7 @@ export function ListUnit({
     choice?: () => void
     active?: boolean
     childrenButton: string
+    isAsteroidSelected?: boolean
 }) {
 
     function isAsteroidBig() {
@@ -58,12 +60,12 @@ export function ListUnit({
             <div className='BottomInfo'>
                 <Button onClick={() => {
                     if (choice) { choice() }
-                    if (active) { if (!stateButton) { setStateButton(!stateButton) } }
                 }}
-                    disabled={stateButton}>{!stateButton ? childrenButton : 'В КОРЗИНЕ'}</Button>
+                    disabled={isAsteroidSelected}>{!isAsteroidSelected ? childrenButton : 'В КОРЗИНЕ'}</Button>
             </div>
         </div>
     </>
 }
 
            // <Button onClick={() => { if (choice) { choice() } if(active) {activeButton()} }}
+        //    if (active) { if (!stateButton) { setStateButton(!stateButton) } }
