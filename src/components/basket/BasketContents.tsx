@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 export function BasketContents({
   selectedAsteroids,
-  remove
+  remove,
+  isDistance,
 }: {
   selectedAsteroids: object[];
   remove: any
+  isDistance: boolean
 }) {
 
 
@@ -18,13 +20,13 @@ export function BasketContents({
         {selectedAsteroids.map((x: any,) => (
           <ListUnit
             date={x.maxApproachDate}
-            distance={x.kilometers}
+            distance={isDistance ? x.kilometers : x.lunar}
             name={x.name}
             size={x.diameter}
             isAlarm={x.isDangerous}
             choice={() => remove(x.name)}
             active={false}
-            childrenButton={'УДАЛИТЬ'}
+            childrenButton={'УДАЛИТЬ'}            
           />
         ))}
       </div>

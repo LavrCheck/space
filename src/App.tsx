@@ -15,7 +15,17 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
 
   let [isDistance, setIsDistance] = useState<boolean>(true)
-  let [selectedAsteroids, setSelectedAsteroids] = useState<any[]>([])
+  let [isSelected, setIsSelected] = useState<boolean>(true)
+
+  const [selectedAsteroids, setSelectedAsteroids] = useState(
+    () => {
+      const saved = localStorage.getItem('selectedAsteroids')
+      return saved ? JSON.parse(saved) : []
+    }
+  )
+  useEffect(() => {
+    localStorage.setItem('selectedAsteroids', JSON.stringify(selectedAsteroids))
+  }, [selectedAsteroids])
 
 
   return (
@@ -24,12 +34,15 @@ function App() {
         <Route path='/' element={
           <div className="App">
             <img src={planet} alt='Planet' className='planet' />
-            <Basket selectedAsteroids={selectedAsteroids}/>
+            <Basket selectedAsteroids={selectedAsteroids} />
             <div className='content'>
               <DiameterSelection isDistance={isDistance}
                 Change={(v: boolean) => setIsDistance(v)} />
               <AsteroidsList isDistance={isDistance}
-                selected={(x: any) => { let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal)} }/>
+                selected={(x: any) => {
+                  if (!selectedAsteroids.some((a: { name: any; }) => a.name === x.name)) { let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal) }
+                }}
+              />
             </div>
           </div>} />
 
@@ -38,9 +51,10 @@ function App() {
             <img src={planet} alt='Planet' className='planet' />
             <div className='content'>
               <DiameterSelection isDistance={isDistance}
-                Change={(v:boolean) => setIsDistance(v)} />
+                Change={(v: boolean) => setIsDistance(v)} />
               <BasketContents selectedAsteroids={selectedAsteroids}
-                remove={(name: any)=>{ setSelectedAsteroids([...selectedAsteroids.filter(x=> x.name !== name)])}}/>
+                remove={(name: any) => { setSelectedAsteroids([...selectedAsteroids.filter((x: { name: any }) => x.name !== name)]) }}
+                isDistance={isDistance} />
             </div>
           </div>
         } />

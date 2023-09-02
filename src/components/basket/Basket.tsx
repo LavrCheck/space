@@ -26,7 +26,9 @@ export function Basket ({
                 <h2>Корзина</h2>
                 <p>{getCorrectForm(selectedAsteroids.length)}</p>
             </div>
+            { selectedAsteroids.length !== 0 &&
         <Link to='/basket'> <Button big={true}>В корзину</Button> </Link>
+            }
         </div>    
     </>
 }

@@ -1,7 +1,7 @@
 import './ListUnit.sass'
 import arrow from '../Images/arrow.svg'
 import asteroidSvg from '../Images/asteroid.svg'
-import {Button} from '../components/ui/Button'
+import { Button } from '../components/ui/Button'
 import alarmSvg from '../Images/alarm.svg'
 import { CSSProperties, useState } from 'react'
 
@@ -15,7 +15,7 @@ export function ListUnit({
     choice,
     active = true,
     childrenButton,
-}:{
+}: {
     date: string
     distance: number
     name: string
@@ -24,32 +24,23 @@ export function ListUnit({
     style?: CSSProperties
     choice?: () => void
     active?: boolean
-    childrenButton: any
+    childrenButton: string
 }) {
 
-    function isAsteroidBig (){
-        if (size > 250) {return {height: '50px', width: '50px'}}
-        else {return {}}
+    function isAsteroidBig() {
+        if (size > 250) { return { height: '50px', width: '50px' } }
+        else { return {} }
     }
 
-    const [stateButton, setStateButton] = useState(false)
-    // const [childrenButton, setChildrenButton] = useState('ЗАКАЗАТЬ')
-    function activeButton () {
-        if (!stateButton) {
-            // setChildrenButton('В КОРЗИНЕ')
-            setStateButton(!stateButton)
-        }
-
-    }
-
+    const [stateButton, setStateButton] = useState<boolean>(false)
 
     return <>
         <div className='ListUnit'>
             <div className='TopInfo'>
-            <h3>{date}</h3>
-            { isAlarm &&
-            <img className='Alarm' src={alarmSvg} alt='alarm'/>
-            }
+                <h3>{date}</h3>
+                {isAlarm &&
+                    <img className='Alarm' src={alarmSvg} alt='alarm' />
+                }
             </div>
             <div className='MiddleInfo'>
                 <div className='MiddleLeft'>
@@ -65,12 +56,14 @@ export function ListUnit({
                 </div>
             </div>
             <div className='BottomInfo'>
-            <Button onClick={() => { if (choice) { choice() } if(active) {activeButton()} }}
-                disabled={stateButton}>{!stateButton ? childrenButton : 'В КОРЗИНЕ'}</Button>
+                <Button onClick={() => {
+                    if (choice) { choice() }
+                    if (active) { if (!stateButton) { setStateButton(!stateButton) } }
+                }}
+                    disabled={stateButton}>{!stateButton ? childrenButton : 'В КОРЗИНЕ'}</Button>
             </div>
         </div>
     </>
-} 
+}
 
-// <h5>Ø 225 м</h5> 
-// <Button onClick={() => { if (choice) { choice() } activeButton() }}
+           // <Button onClick={() => { if (choice) { choice() } if(active) {activeButton()} }}
