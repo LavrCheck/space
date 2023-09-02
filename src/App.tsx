@@ -15,6 +15,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
 
   let [isDistance, setIsDistance] = useState<boolean>(true)
+  let [isOrderSend, setIsOrderSend] = useState<boolean>(false)
 
   const [selectedAsteroids, setSelectedAsteroids] = useState(
     () => {
@@ -39,8 +40,8 @@ function App() {
                 Change={(v: boolean) => setIsDistance(v)} />
               <AsteroidsList isDistance={isDistance}
                 selected={(x: any) => {
-                  if (!selectedAsteroids.some((a: { name: any; }) => a.name === x.name)) { let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal) }
-                }}
+                   let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal) 
+                  setIsOrderSend(false)}}
                 selectedAsteroids = {selectedAsteroids}
               />
             </div>
@@ -50,11 +51,24 @@ function App() {
           <div className='App'>
             <img src={planet} alt='Planet' className='planet' />
             <div className='content'>
+              { !isOrderSend ? (
+                <React.Fragment>
+              { selectedAsteroids.length !==0 ? (
               <DiameterSelection isDistance={isDistance}
-                Change={(v: boolean) => setIsDistance(v)} />
+                Change={(v: boolean) => setIsDistance(v)} />) : (
+                  <div className='variantBasket'>
+                  <p>Корзина пуста</p>
+                  <p>Земля в опасности!</p>
+                  </div>
+                )
+              } 
               <BasketContents selectedAsteroids={selectedAsteroids}
-                remove={(name: any) => { setSelectedAsteroids([...selectedAsteroids.filter((x: { name: any }) => x.name !== name)]) }}
-                isDistance={isDistance} />
+                remove={(name: any) => { setSelectedAsteroids
+                  ([...selectedAsteroids.filter((x: { name: any }) => x.name !== name)]) }}
+                isDistance={isDistance} 
+                sendOrder={()=> {setSelectedAsteroids([]);setIsOrderSend(true)}}/> </React.Fragment>) 
+              : (<div className='variantBasket'><p>Заказ отправлен!</p></div>)
+        }
             </div>
           </div>
         } />

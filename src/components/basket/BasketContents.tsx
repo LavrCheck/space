@@ -1,15 +1,18 @@
 import './BasketContents.sass';
 import { ListUnit } from '../ListUnit';
 import { useState } from 'react';
+import { Button } from '../ui/Button';
 
 export function BasketContents({
   selectedAsteroids,
   remove,
   isDistance,
+  sendOrder,
 }: {
   selectedAsteroids: object[];
   remove: any
   isDistance: boolean
+  sendOrder: any
 }) {
 
 
@@ -29,6 +32,9 @@ export function BasketContents({
             childrenButton={'УДАЛИТЬ'}            
           />
         ))}
+        <div className='buttonsContainer'>
+          <Button big={true} onClick={sendOrder}>Отправить</Button>
+        </div> 
       </div>
     </>
   );

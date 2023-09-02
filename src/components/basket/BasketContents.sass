@@ -1,6 +1,15 @@
 .BasketContents
+    display: flex
+    flex-direction: column
     width: 300px
 
+    @media (max-width: 300px)
+        align-items: center
 
     h1
         color: #f2f2f2
+
+    .buttonsContainer
+        display: flex
+        justify-content: center
+        margin-top: 40px
