@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import example from './exemjopa.json'
 import './App.css';
 import './App.sass'
 import { getList } from './api';
-import { ListUnit } from './components/ListUnit';
 import { AsteroidsList } from './components/AsteroidsList';
 import { Basket } from './components/basket/Basket';
 import { BasketContents } from './components/basket/BasketContents';
@@ -34,8 +31,8 @@ function App() {
         <Route path='/' element={
           <div className="App">
             <img src={planet} alt='Planet' className='planet' />
-            <Basket selectedAsteroids={selectedAsteroids} />
             <div className='content'>
+            <Basket selectedAsteroids={selectedAsteroids} />
               <DiameterSelection isDistance={isDistance}
                 Change={(v: boolean) => setIsDistance(v)} />
               <AsteroidsList isDistance={isDistance}
@@ -52,21 +49,25 @@ function App() {
             <img src={planet} alt='Planet' className='planet' />
             <div className='content'>
               { !isOrderSend ? (
-                <React.Fragment>
+                <>
               { selectedAsteroids.length !==0 ? (
+                <>
               <DiameterSelection isDistance={isDistance}
-                Change={(v: boolean) => setIsDistance(v)} />) : (
+                Change={(v: boolean) => setIsDistance(v)} />
+                <BasketContents selectedAsteroids={selectedAsteroids}
+                remove={(name: string) => { setSelectedAsteroids
+                  ([...selectedAsteroids.filter((x: { name: string }) => x.name !== name)]) }}
+                isDistance={isDistance} 
+                sendOrder={()=> {setSelectedAsteroids([]);setIsOrderSend(true)}}/>
+                </>
+                ) : (
                   <div className='variantBasket'>
                   <p>Корзина пуста</p>
                   <p>Земля в опасности!</p>
                   </div>
                 )
               } 
-              <BasketContents selectedAsteroids={selectedAsteroids}
-                remove={(name: any) => { setSelectedAsteroids
-                  ([...selectedAsteroids.filter((x: { name: any }) => x.name !== name)]) }}
-                isDistance={isDistance} 
-                sendOrder={()=> {setSelectedAsteroids([]);setIsOrderSend(true)}}/> </React.Fragment>) 
+                 </>) 
               : (<div className='variantBasket'><p>Заказ отправлен!</p></div>)
         }
             </div>
