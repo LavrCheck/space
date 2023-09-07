@@ -12,7 +12,8 @@ const convertList = (data: any): any[] => {
         isDangerous: x.is_potentially_hazardous_asteroid,
         lunar:convertLunar( Number(x.close_approach_data[0].miss_distance.lunar.split('.')[0])),
         kilometers: Number(x.close_approach_data[0].miss_distance.kilometers.split('.')[0]).toLocaleString() + ' км',
-        maxApproachDate: convertDate(x.close_approach_data[0].close_approach_date_full.split(' ')[0])
+        maxApproachDate: convertDate(x.close_approach_data[0].close_approach_date_full.split(' ')[0]),
+        id: x.id
       }
     })
   }
@@ -55,7 +56,7 @@ export function AsteroidsList ({
   }:{
     isDistance: boolean
     selected: (data: any) => void
-    selectedAsteroids: any
+    selectedAsteroids: any[]
   }){
 
     let [asteroids, setAsteroids] = useState<any[]>([])
@@ -71,6 +72,7 @@ export function AsteroidsList ({
         setAsteroids(convertList(example))
       })()
     }, [example])
+
 
  
     return (
@@ -90,6 +92,4 @@ export function AsteroidsList ({
 
 }
 
-// distance={x.kilometers}
-// choice={() => setSelectedAsteroids(selectedAsteroids.concat(x)) }
 

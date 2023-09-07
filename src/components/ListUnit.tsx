@@ -3,7 +3,6 @@ import arrow from '../Images/arrow.svg'
 import asteroidSvg from '../Images/asteroid.svg'
 import { Button } from '../components/ui/Button'
 import alarmSvg from '../Images/alarm.svg'
-import { CSSProperties, useState } from 'react'
 
 export function ListUnit({
     date,
@@ -11,9 +10,7 @@ export function ListUnit({
     name,
     size,
     isAlarm,
-    style,
     choice,
-    active = true,
     childrenButton,
     isAsteroidSelected = false
 }: {
@@ -22,7 +19,6 @@ export function ListUnit({
     name: string
     size: number
     isAlarm: boolean
-    style?: CSSProperties
     choice?: () => void
     active?: boolean
     childrenButton: string
@@ -34,7 +30,6 @@ export function ListUnit({
         else { return {} }
     }
 
-    const [stateButton, setStateButton] = useState<boolean>(false)
 
     return <>
         <div className='ListUnit'>
@@ -67,5 +62,3 @@ export function ListUnit({
     </>
 }
 
-           // <Button onClick={() => { if (choice) { choice() } if(active) {activeButton()} }}
-        //    if (active) { if (!stateButton) { setStateButton(!stateButton) } }

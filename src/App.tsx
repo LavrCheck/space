@@ -25,6 +25,9 @@ function App() {
   }, [selectedAsteroids])
 
 
+
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -75,8 +78,4 @@ function App() {
 
 export default App;
 
-// {asteroids.map((x: any) =>
-//   <p>{x.name}</p>
-// )}
 
-// <ListUnit date={asteroids[0].maxApproachDate}/>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export function Basket ({
     selectedAsteroids,
 }:{
-    selectedAsteroids: any
+    selectedAsteroids: any[]
 }) {
     function getCorrectForm(number: number) {
         if (number === 0) {

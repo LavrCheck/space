@@ -1,6 +1,5 @@
 import './BasketContents.sass';
 import { ListUnit } from '../ListUnit';
-import { useState } from 'react';
 import { Button } from '../ui/Button';
 
 export function BasketContents({
@@ -12,7 +11,7 @@ export function BasketContents({
   selectedAsteroids: object[];
   remove: any
   isDistance: boolean
-  sendOrder: any
+  sendOrder: ()=> void
 }) {
 
 
