@@ -8,13 +8,15 @@ export const Button = (
         onClick,
         big = false,
         disabled = false,
+        small = false,
     } : {
         children: string
         style?: CSSProperties
         onClick?: any
         big?: boolean
         disabled?: boolean
+        small?: boolean
     }
 ) =>
-    <button className={`Button ${big ? 'big' : ''}`} style={style}
+    <button className={`Button ${big ? 'big' : ''} ${small ? 'small': ''}`} style={style}
      onClick={onClick} disabled={disabled}>{children}</button>

@@ -3,6 +3,7 @@ import example from '../exemjopa.json'
 import { getList } from '../api'
 import { ListUnit } from "./ListUnit";
 import './AsteroidList.sass'
+import { useNavigate } from "react-router-dom";
 
 const convertList = (data: any): any[] => {
     return Object.values(data.near_earth_objects).flat().map((x: any) => {
@@ -17,7 +18,7 @@ const convertList = (data: any): any[] => {
       }
     })
   }
-  const convertLunar = (number: number) => {
+  export const convertLunar = (number: number) => {
     const lastDigit = number % 10;
     const lastTwoDigits = number % 100;
   
@@ -34,7 +35,7 @@ const convertList = (data: any): any[] => {
     }
   };
   
-  const convertDate = (date: string) => {
+  export const convertDate = (date: string) => {
     return date.replace('-Jan-', ' Янв ')
       .replace('-Feb-', ' Фев ')
       .replace('-Mar-', ' Март ')
@@ -73,7 +74,7 @@ export function AsteroidsList ({
       })()
     }, [example])
 
-
+    let navigate = useNavigate()
  
     return (
         <div className='AsteroidsList'>
@@ -86,6 +87,7 @@ export function AsteroidsList ({
             choice={() => selected(x) }
             childrenButton={'ЗАКАЗАТЬ'}
             isAsteroidSelected={selectedAsteroids.some((a: { name: any; }) => a.name === x.name)}
+            goInfo={()=> navigate(`/info/${x.id}`)}
             />)}
         </div>
     )

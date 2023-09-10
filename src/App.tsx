@@ -8,6 +8,7 @@ import { BasketContents } from './components/basket/BasketContents';
 import planet from './Images/planet.png'
 import { DiameterSelection } from './components/DiameterSelection';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Info } from './components/Info';
 
 function App() {
 
@@ -68,6 +69,8 @@ function App() {
                       </div>)} 
                      </>) 
                   : (<div className='variantBasket'><p>Заказ отправлен!</p></div>)} </>}/>
+
+                  <Route path='/info/:id' element={<Info/>}/>
               </Routes>
             </div>
           </div>} />
