@@ -38,39 +38,42 @@ function App() {
             <div className='content'>
 
               <Routes>
-                <Route path='/' element={ <>
-            <Basket selectedAsteroids={selectedAsteroids} />
-              <DiameterSelection isDistance={isDistance}
-                Change={(v: boolean) => setIsDistance(v)} />
-              <AsteroidsList isDistance={isDistance}
-                selected={(x: any) => {
-                   let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal) 
-                  setIsOrderSend(false)}}
-                selectedAsteroids = {selectedAsteroids}
-              /> </>} />
-
-                <Route path='/basket' element={ <>
-                  { !isOrderSend ? (
-                    <>
-                  { selectedAsteroids.length !==0 ? (
-                    <>
+                <Route path='/' element={<>
+                  <Basket selectedAsteroids={selectedAsteroids} />
                   <DiameterSelection isDistance={isDistance}
                     Change={(v: boolean) => setIsDistance(v)} />
-                    <BasketContents selectedAsteroids={selectedAsteroids}
-                    remove={(name: string) => { setSelectedAsteroids
-                      ([...selectedAsteroids.filter((x: { name: string }) => x.name !== name)]) }}
-                    isDistance={isDistance} 
-                    sendOrder={()=> {setSelectedAsteroids([]);setIsOrderSend(true)}}/>
-                    </>
-                    ) : (
-                      <div className='variantBasket'>
-                      <p>Корзина пуста</p>
-                      <p>Земля в опасности!</p>
-                      </div>)} 
-                     </>) 
-                  : (<div className='variantBasket'><p>Заказ отправлен!</p></div>)} </>}/>
+                  <AsteroidsList isDistance={isDistance}
+                    selected={(x: any) => {
+                      let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal)
+                      setIsOrderSend(false)
+                    }}
+                    selectedAsteroids={selectedAsteroids}
+                  /> </>} />
 
-                  <Route path='/info/:id' element={<Info/>}/>
+                <Route path='/basket' element={<>
+                  {!isOrderSend ? (
+                    <>
+                      {selectedAsteroids.length !== 0 ? (
+                        <>
+                          <DiameterSelection isDistance={isDistance}
+                            Change={(v: boolean) => setIsDistance(v)} />
+                          <BasketContents selectedAsteroids={selectedAsteroids}
+                            remove={(name: string) => {
+                              setSelectedAsteroids
+                                ([...selectedAsteroids.filter((x: { name: string }) => x.name !== name)])
+                            }}
+                            isDistance={isDistance}
+                            sendOrder={() => { setSelectedAsteroids([]); setIsOrderSend(true) }} />
+                        </>
+                      ) : (
+                        <div className='variantBasket'>
+                          <p>Корзина пуста</p>
+                          <p>Земля в опасности!</p>
+                        </div>)}
+                    </>)
+                    : (<div className='variantBasket'><p>Заказ отправлен!</p></div>)} </>} />
+
+                <Route path='/info/:id' element={<Info />} />
               </Routes>
             </div>
           </div>} />

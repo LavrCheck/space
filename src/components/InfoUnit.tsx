@@ -1,13 +1,32 @@
 import './InfoUnit.sass'
+import arrow from '../Images/arrow.svg'
+import speedSvg from '../Images/speed.svg'
 
-export function InfoUnit() {
+export function InfoUnit({
+    orbit,
+    date,
+    distance,
+    speed,
+}: {
+    orbit: string
+    date: any
+    distance: any
+    speed: any
+}) {
+
+
     return <>
         <div className="InfoUnit">
-            <p>Меркурий</p>
+            <h1>{orbit}</h1>
             <div className='middleInfo'>
-                <p>19 iunia 1900 16:30</p> <p> 6 666 666 km</p>
+                <p>{date}</p>
+                <img src={arrow} alt='arrow' />
+                <p>{distance}</p>
             </div>
-            <p>114 401,888 km/ch</p>
+            <div className='botInfo'>
+                <img src={speedSvg} alt='speed' />
+                <p>{speed}</p>
+            </div>
         </div>
     </>
 }

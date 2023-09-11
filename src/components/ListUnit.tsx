@@ -57,7 +57,7 @@ export function ListUnit({
             <div className='BottomInfo'>
                 <Button onClick={() => {
                     if (choice) { choice() }
-                    }}
+                }}
                     disabled={isAsteroidSelected}>{!isAsteroidSelected ? childrenButton : 'В КОРЗИНЕ'}</Button>
                 <Button small={true} onClick={goInfo}>?</Button>
             </div>
