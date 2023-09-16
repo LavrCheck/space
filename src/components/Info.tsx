@@ -28,9 +28,9 @@ export function Info({
     }
 
     useEffect(() => {
-        // getUnit(id).then((data)=> {})
-        setAllInfo(convertAllInfo(jInfo))
-    }, [jInfo])
+        getUnit(id).then((data)=> {setAllInfo((convertAllInfo(data)))})
+        // setAllInfo(convertAllInfo(jInfo))
+    }, [id])
 
     function convertOrbit(data: string) {
         return data.replace('Merc', 'Меркурий')
@@ -50,15 +50,14 @@ export function Info({
                 isDistance={isDistance}
                 name="Ближайшие сближения астероида"
             />
-
             <div className="unitsContainer">
                 {
-                        allInfo.map((x) =>{
-                        return <InfoUnit
-                        date={x.date}
-                        distance={isDistance ? x.distanceKm : x.distanceLun}
-                        orbit={x.orbit}
-                        speed={x.speed} 
+                    allInfo.map((x) =>{
+                    return <InfoUnit
+                    date={x.date}
+                    distance={isDistance ? x.distanceKm : x.distanceLun}
+                    orbit={x.orbit}
+                    speed={x.speed} 
                     />})
                 }
             </div>

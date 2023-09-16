@@ -18,6 +18,7 @@ const convertList = (data: any): any[] => {
     }
   })
 }
+
 export const convertLunar = (number: number) => {
   const lastDigit = number % 10;
   const lastTwoDigits = number % 100;
@@ -27,13 +28,13 @@ export const convertLunar = (number: number) => {
     lastDigit === 0 ||
     (lastDigit >= 5 && lastDigit <= 9)
   ) {
-    return `${number} лунных орбит`;
+    return `${number} лунных орбит`
   } else if (lastDigit === 1) {
-    return `${number} лунная орбита`;
+    return `${number} лунная орбита`
   } else {
-    return `${number} лунные орбиты`;
+    return `${number} лунные орбиты`
   }
-};
+}
 
 export const convertDate = (date: string) => {
   return date.replace('-Jan-', ' Янв ')
@@ -62,17 +63,16 @@ export function AsteroidsList({
 
   let [asteroids, setAsteroids] = useState<any[]>([])
 
-  let end = new Date()
-  let start = new Date()
-  end.setDate(end.getDate() - 6)
-
+  let today = new Date()
+  let nextWeek = new Date()
+  nextWeek.setDate(nextWeek.getDate() + 7)
 
   useEffect(() => {
     (async () => {
-      //let date = await getList(end, start)
-      setAsteroids(convertList(example))
+      let data = await getList(today, nextWeek)
+      setAsteroids(convertList(data))
     })()
-  }, [example])
+  },[])
 
   let navigate = useNavigate()
 
