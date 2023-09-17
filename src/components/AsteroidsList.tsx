@@ -51,6 +51,21 @@ export const convertDate = (date: string) => {
     .replace('-Dec-', ' Дек ')
 }
 
+const sortConvertDate = (date: string) => {
+  return date.replace(' Янв ', '/01/')
+  .replace( ' Фев ', '/02/')
+  .replace( ' Март ', '/03/')
+  .replace( ' Апр ', '/04/')
+  .replace( ' Май ', '/05/')
+  .replace( ' Июнь ', '/06/')
+  .replace( ' Июль ', '/07/')
+  .replace( ' Авг ', '/08/')
+  .replace( ' Сен ', '/09/')
+  .replace( ' Окт ', '/10/')
+  .replace( ' Нояб ', '/11/')
+  .replace( ' Дек ', '/12/')
+}
+
 export function AsteroidsList({
   isDistance,
   selected,
@@ -76,6 +91,14 @@ export function AsteroidsList({
 
   let navigate = useNavigate()
 
+  console.log(asteroids.map((x) => new Date(sortConvertDate(x.maxApproachDate))))
+
+  asteroids.sort((x, y) => {
+    const dateX = new Date(sortConvertDate(x.maxApproachDate))
+    const dateY = new Date(sortConvertDate(y.maxApproachDate))
+    return dateX.getTime() - dateY.getTime()
+  })
+
   return (
     <div className='AsteroidsList'>
       {asteroids.map((x: any, i) => <ListUnit
@@ -89,6 +112,7 @@ export function AsteroidsList({
         childrenButton={'ЗАКАЗАТЬ'}
         isAsteroidSelected={selectedAsteroids.some((a: { name: any; }) => a.name === x.name)}
         goInfo={() => navigate(`/info/${x.id}`)}
+        
       />)}
     </div>
   )
