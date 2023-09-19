@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getUnit } from "../api"
-import jInfo from '../info.json'
 import { convertDate } from "./AsteroidsList"
 import { convertLunar } from "./AsteroidsList"
 import { InfoUnit } from "./InfoUnit"
 import './Info.sass'
 import { DiameterSelection } from "./DiameterSelection"
 
-export function Info({
-}:{
-}) {
+export function Info() {
 
     let { id }: any = useParams()
     let [allInfo, setAllInfo] = useState<any[]>([])
@@ -29,7 +26,6 @@ export function Info({
 
     useEffect(() => {
         getUnit(id).then((data)=> {setAllInfo((convertAllInfo(data)))})
-        // setAllInfo(convertAllInfo(jInfo))
     }, [id])
 
     function convertOrbit(data: string) {

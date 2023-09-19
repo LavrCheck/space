@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import './App.sass'
-import { getList } from './api';
 import { AsteroidsList } from './components/AsteroidsList';
 import { Basket } from './components/basket/Basket';
 import { BasketContents } from './components/basket/BasketContents';

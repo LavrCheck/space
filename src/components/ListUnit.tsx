@@ -24,7 +24,7 @@ export function ListUnit({
     active?: boolean
     childrenButton: string
     isAsteroidSelected?: boolean
-    goInfo?: any
+    goInfo?: () => void
 }) {
 
     function isAsteroidBig() {

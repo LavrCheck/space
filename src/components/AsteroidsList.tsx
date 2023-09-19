@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import example from '../exemjopa.json'
 import { getList } from '../api'
 import { ListUnit } from "./ListUnit";
 import './AsteroidList.sass'
