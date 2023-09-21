@@ -6,6 +6,7 @@ import { convertLunar } from "./AsteroidsList"
 import { InfoUnit } from "./InfoUnit"
 import './Info.sass'
 import { DiameterSelection } from "./DiameterSelection"
+import loadingGif from '../Images/loading.gif'
 
 export function Info() {
 
@@ -24,39 +25,41 @@ export function Info() {
         })
     }
 
+    let [isLoading, setIsLoading] = useState<boolean>(true)
+
     useEffect(() => {
-        getUnit(id).then((data)=> {setAllInfo((convertAllInfo(data)))})
+        setIsLoading(true)
+        getUnit(id).then((data)=> {setAllInfo((convertAllInfo(data)));setIsLoading(false)})
     }, [id])
 
     function convertOrbit(data: string) {
         return data.replace('Merc', 'Меркурий')
             .replace('Venus', 'Венера')
             .replace('Earth', 'Земля')
+            .replace('Moon', 'Луна')
+            .replace('Juptr', 'Юпитер')
     }
-
-
 
     let [isDistance, setIsDistance] = useState(true)
 
-
     return <>
         <div className="Info">
+            { isLoading ? (<img className="loading" src={loadingGif} alt="Loading"/>) : (<>
             <DiameterSelection 
                 Change={(b) => setIsDistance(b)}
                 isDistance={isDistance}
                 name="Ближайшие сближения астероида"
             />
-            <div className="unitsContainer">
-                {
-                    allInfo.map((x) =>{
+            <div className="unitsContainer">                
+                    {allInfo.map((x) =>{
                     return <InfoUnit
                     date={x.date}
                     distance={isDistance ? x.distanceKm : x.distanceLun}
                     orbit={x.orbit}
                     speed={x.speed} 
-                    />})
-                }
+                    />})}                
             </div>
+         </>)}
         </div>
     </>
 

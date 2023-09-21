@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import { getList } from '../api'
-import { ListUnit } from "./ListUnit";
+import { ListUnit } from "./ListUnit"
 import './AsteroidList.sass'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import loadingGif from '../Images/loading.gif'
 
 const convertList = (data: any): any[] => {
   return Object.values(data.near_earth_objects).flat().map((x: any) => {
@@ -81,10 +82,14 @@ export function AsteroidsList({
   let nextWeek = new Date()
   nextWeek.setDate(nextWeek.getDate() + 7)
 
+  let [isLoading, setIsLoading] = useState<boolean>(true)
+
   useEffect(() => {
     (async () => {
+      setIsLoading(true)
       let data = await getList(today, nextWeek)
       setAsteroids(convertList(data))
+      setIsLoading(false)
     })()
   },[])
 
@@ -98,23 +103,31 @@ export function AsteroidsList({
     return dateX.getTime() - dateY.getTime()
   })
 
+
   return (
     <div className='AsteroidsList'>
-      {asteroids.map((x: any, i) => <ListUnit
-        key={i}
-        date={x.maxApproachDate}
-        distance={isDistance ? x.kilometers : x.lunar}
-        name={x.name}
-        size={x.diameter}
-        isAlarm={x.isDangerous}
-        choice={() => selected(x)}
-        childrenButton={'ЗАКАЗАТЬ'}
-        isAsteroidSelected={selectedAsteroids.some((a: { name: any; }) => a.name === x.name)}
-        goInfo={() => navigate(`/info/${x.id}`)}
-        
-      />)}
+      {isLoading ? (
+        <img className="loading" src={loadingGif} alt="Loading"/>
+      ) : (
+        asteroids.map((x: any, i) => (
+          <ListUnit
+            key={i}
+            date={x.maxApproachDate}
+            distance={isDistance ? x.kilometers : x.lunar}
+            name={x.name}
+            size={x.diameter}
+            isAlarm={x.isDangerous}
+            choice={() => selected(x)}
+            childrenButton={'ЗАКАЗАТЬ'}
+            isAsteroidSelected={selectedAsteroids.some(
+              (a: { name: any }) => a.name === x.name
+            )}
+            goInfo={() => navigate(`/info/${x.id}`)} 
+          />
+        ))
+      )}
     </div>
-  )
+  );
 
 }
 

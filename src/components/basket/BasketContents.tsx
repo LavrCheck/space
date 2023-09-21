@@ -14,7 +14,7 @@ export function BasketContents({
   sendOrder: ()=> void
 }) {
 
-
+  
 
   return (
     <>

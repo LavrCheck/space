@@ -55,7 +55,8 @@ function App() {
                       {selectedAsteroids.length !== 0 ? (
                         <>
                           <DiameterSelection isDistance={isDistance}
-                            Change={(v: boolean) => setIsDistance(v)} />
+                            Change={(v: boolean) => setIsDistance(v)}
+                            name='Подлеты астероидов в корзине' />
                           <BasketContents selectedAsteroids={selectedAsteroids}
                             remove={(name: string) => {
                               setSelectedAsteroids

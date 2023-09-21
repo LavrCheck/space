@@ -38,7 +38,7 @@ export function ListUnit({
             <div className='TopInfo'>
                 <h3>{date}</h3>
                 {isAlarm &&
-                    <img className='Alarm' src={alarmSvg} alt='alarm' />
+                    <img className='Alarm' title='Опасный' src={alarmSvg} alt='alarm' />
                 }
             </div>
             <div className='MiddleInfo'>
