@@ -29,7 +29,7 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/space">
       <Routes>
         <Route path='/*' element={
           <div className="App">
