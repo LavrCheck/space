@@ -8,7 +8,7 @@ import './Info.sass'
 import { DiameterSelection } from "./DiameterSelection"
 import loadingGif from '../Images/loading.gif'
 
-export function Info() { красивый
+export function Info() {     
 
     let { id }: any = useParams()
     let [allInfo, setAllInfo] = useState<any[]>([])
