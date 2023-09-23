@@ -8,7 +8,7 @@ import './Info.sass'
 import { DiameterSelection } from "./DiameterSelection"
 import loadingGif from '../Images/loading.gif'
 
-export function Info() {
+export function Info() { красивый
 
     let { id }: any = useParams()
     let [allInfo, setAllInfo] = useState<any[]>([])
@@ -29,7 +29,7 @@ export function Info() {
 
     useEffect(() => {
         setIsLoading(true)
-        getUnit(id).then((data)=> {setAllInfo((convertAllInfo(data)));setIsLoading(false)})
+        getUnit(id).then((data) => { setAllInfo((convertAllInfo(data))); setIsLoading(false) })
     }, [id])
 
     function convertOrbit(data: string) {
@@ -38,28 +38,30 @@ export function Info() {
             .replace('Earth', 'Земля')
             .replace('Moon', 'Луна')
             .replace('Juptr', 'Юпитер')
+            .replace('Mars', 'Марс')
     }
 
     let [isDistance, setIsDistance] = useState(true)
 
     return <>
         <div className="Info">
-            { isLoading ? (<img className="loading" src={loadingGif} alt="Loading"/>) : (<>
-            <DiameterSelection 
-                Change={(b) => setIsDistance(b)}
-                isDistance={isDistance}
-                name="Ближайшие сближения астероида"
-            />
-            <div className="unitsContainer">                
-                    {allInfo.map((x) =>{
-                    return <InfoUnit
-                    date={x.date}
-                    distance={isDistance ? x.distanceKm : x.distanceLun}
-                    orbit={x.orbit}
-                    speed={x.speed} 
-                    />})}                
-            </div>
-         </>)}
+            {isLoading ? (<img className="loading" src={loadingGif} alt="Loading" />) : (<>
+                <DiameterSelection
+                    Change={(b) => setIsDistance(b)}
+                    isDistance={isDistance}
+                    name="Ближайшие сближения астероида"
+                />
+                <div className="unitsContainer">
+                    {allInfo.map((x) => {
+                        return <InfoUnit
+                            date={x.date}
+                            distance={isDistance ? x.distanceKm : x.distanceLun}
+                            orbit={x.orbit}
+                            speed={x.speed}
+                        />
+                    })}
+                </div>
+            </>)}
         </div>
     </>
 

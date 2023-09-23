@@ -53,17 +53,17 @@ export const convertDate = (date: string) => {
 
 const sortConvertDate = (date: string) => {
   return date.replace(' Янв ', '/01/')
-  .replace( ' Фев ', '/02/')
-  .replace( ' Март ', '/03/')
-  .replace( ' Апр ', '/04/')
-  .replace( ' Май ', '/05/')
-  .replace( ' Июнь ', '/06/')
-  .replace( ' Июль ', '/07/')
-  .replace( ' Авг ', '/08/')
-  .replace( ' Сен ', '/09/')
-  .replace( ' Окт ', '/10/')
-  .replace( ' Нояб ', '/11/')
-  .replace( ' Дек ', '/12/')
+    .replace(' Фев ', '/02/')
+    .replace(' Март ', '/03/')
+    .replace(' Апр ', '/04/')
+    .replace(' Май ', '/05/')
+    .replace(' Июнь ', '/06/')
+    .replace(' Июль ', '/07/')
+    .replace(' Авг ', '/08/')
+    .replace(' Сен ', '/09/')
+    .replace(' Окт ', '/10/')
+    .replace(' Нояб ', '/11/')
+    .replace(' Дек ', '/12/')
 }
 
 export function AsteroidsList({
@@ -91,7 +91,7 @@ export function AsteroidsList({
       setAsteroids(convertList(data))
       setIsLoading(false)
     })()
-  },[])
+  }, [])
 
   let navigate = useNavigate()
 
@@ -107,7 +107,7 @@ export function AsteroidsList({
   return (
     <div className='AsteroidsList'>
       {isLoading ? (
-        <img className="loading" src={loadingGif} alt="Loading"/>
+        <img className="loading" src={loadingGif} alt="Loading" />
       ) : (
         asteroids.map((x: any, i) => (
           <ListUnit
@@ -122,7 +122,7 @@ export function AsteroidsList({
             isAsteroidSelected={selectedAsteroids.some(
               (a: { name: any }) => a.name === x.name
             )}
-            goInfo={() => navigate(`/info/${x.id}`)} 
+            goInfo={() => navigate(`/info/${x.id}`)}
           />
         ))
       )}

@@ -11,10 +11,10 @@ export function BasketContents({
   selectedAsteroids: object[];
   remove: any
   isDistance: boolean
-  sendOrder: ()=> void
+  sendOrder: () => void
 }) {
 
-  
+
 
   return (
     <>
@@ -28,12 +28,12 @@ export function BasketContents({
             isAlarm={x.isDangerous}
             choice={() => remove(x.name)}
             active={false}
-            childrenButton={'УДАЛИТЬ'}            
+            childrenButton={'УДАЛИТЬ'}
           />
         ))}
         <div className='buttonsContainer'>
           <Button big={true} onClick={sendOrder}>Отправить</Button>
-        </div> 
+        </div>
       </div>
     </>
   );
