@@ -1,11 +1,22 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef, CSSProperties } from "react"
 import { getList } from '../api'
 import { ListUnit } from "./ListUnit"
 import './AsteroidList.sass'
 import { useNavigate } from "react-router-dom"
-import loadingGif from '../Images/loading.gif'
+import loadingGif from '../Images/loading.gif' 
 
-const convertList = (data: any): any[] => {
+
+export type asteroids = {
+  name: string
+  diameter: number
+  isDangerous: boolean
+  lunar: string
+  kilometers: string
+  maxApproachDate: string
+  id: number
+}
+
+const convertList = (data: any): asteroids[] => {
   return Object.values(data.near_earth_objects).flat().map((x: any) => {
     return {
       name: x.name,
@@ -66,52 +77,90 @@ const sortConvertDate = (date: string) => {
     .replace(' Дек ', '/12/')
 }
 
+const styleForLoading : CSSProperties = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+}
+
+
+
 export function AsteroidsList({
   isDistance,
   selected,
   selectedAsteroids,
+  isAsteroids,
 }: {
   isDistance: boolean
-  selected: (data: any) => void
-  selectedAsteroids: any[]
+  selected: (data: asteroids) => void
+  selectedAsteroids: asteroids[]
+  isAsteroids: (data: boolean) => void
 }) {
 
-  let [asteroids, setAsteroids] = useState<any[]>([])
+  const [asteroids, setAsteroids] = useState<asteroids[]>([])
+  isAsteroids( asteroids.length === 0)
 
-  let today = new Date()
-  let nextWeek = new Date()
-  nextWeek.setDate(nextWeek.getDate() + 7)
+  const startDate = new Date()
+  const endDate = new Date()
+  endDate.setDate(endDate.getDate() + 3)
 
-  let [isLoading, setIsLoading] = useState<boolean>(true)
+  let scrollHandlerLock = useRef(false)
+  useEffect(() => {
+    const handleScroll = async () => {
+
+      if (scrollHandlerLock.current) {
+        return
+      }
+      scrollHandlerLock.current = true
+
+      let scrollHeight = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      )
+
+      const scrolledUntilEnd = (window.innerHeight + window.pageYOffset) >= scrollHeight - 100
+      console.log(scrolledUntilEnd)
+      if (scrolledUntilEnd) {
+        startDate.setDate(startDate.getDate() + 3)
+        endDate.setDate(endDate.getDate() + 3)
+        const data = await getList(startDate, endDate)
+        setAsteroids(prevAster => [...prevAster, ...convertList(data)])
+      }
+
+      scrollHandlerLock.current = false
+    }
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  })
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true)
-      let data = await getList(today, nextWeek)
+      let data = await getList(startDate, endDate)
       setAsteroids(convertList(data))
-      setIsLoading(false)
     })()
-  }, [])
+  },[])
 
-  let navigate = useNavigate()
-
-  console.log(asteroids.map((x) => new Date(sortConvertDate(x.maxApproachDate))))
+  const navigate = useNavigate()
 
   asteroids.sort((x, y) => {
     const dateX = new Date(sortConvertDate(x.maxApproachDate))
     const dateY = new Date(sortConvertDate(y.maxApproachDate))
     return dateX.getTime() - dateY.getTime()
   })
-
+  
+  
 
   return (
     <div className='AsteroidsList'>
-      {isLoading ? (
-        <img className="loading" src={loadingGif} alt="Loading" />
-      ) : (
-        asteroids.map((x: any, i) => (
+      {
+        asteroids.map((x: asteroids) => (
           <ListUnit
-            key={i}
+            key={x.id}
             date={x.maxApproachDate}
             distance={isDistance ? x.kilometers : x.lunar}
             name={x.name}
@@ -120,14 +169,15 @@ export function AsteroidsList({
             choice={() => selected(x)}
             childrenButton={'ЗАКАЗАТЬ'}
             isAsteroidSelected={selectedAsteroids.some(
-              (a: { name: any }) => a.name === x.name
+              (a: { name: string }) => a.name === x.name
             )}
             goInfo={() => navigate(`/info/${x.id}`)}
           />
         ))
-      )}
+      }
+      <img src={loadingGif} alt="loading" className="loading" style={asteroids.length === 0 ? styleForLoading : {}}/>
     </div>
-  );
+  )
 
 }
 

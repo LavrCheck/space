@@ -9,9 +9,9 @@ export function InfoUnit({
     speed,
 }: {
     orbit: string
-    date: any
-    distance: any
-    speed: any
+    date: string
+    distance: string
+    speed: string
 }) {
 
 

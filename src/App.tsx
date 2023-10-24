@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import './App.css'
 import './App.sass'
-import { AsteroidsList } from './components/AsteroidsList';
-import { Basket } from './components/basket/Basket';
-import { BasketContents } from './components/basket/BasketContents';
+import { AsteroidsList } from './components/AsteroidsList'
+import { Basket } from './components/basket/Basket'
+import { BasketContents } from './components/basket/BasketContents'
 import planet from './Images/planet.png'
-import { DiameterSelection } from './components/DiameterSelection';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Info } from './components/Info';
+import { DiameterSelection } from './components/DiameterSelection'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Info } from './components/Info'
+import { asteroids } from './components/AsteroidsList'
+
+
 
 function App() {
 
-  let [isDistance, setIsDistance] = useState<boolean>(true)
-  let [isOrderSend, setIsOrderSend] = useState<boolean>(false)
+  const [isDistance, setIsDistance] = useState<boolean>(true)
+  const [isOrderSend, setIsOrderSend] = useState<boolean>(false)
+  const [isDiameterHidden, setIsDiameterHidden] = useState<boolean>(true)
 
   const [selectedAsteroids, setSelectedAsteroids] = useState(
     () => {
@@ -23,8 +27,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem('selectedAsteroids', JSON.stringify(selectedAsteroids))
   }, [selectedAsteroids])
-
-
 
 
 
@@ -40,13 +42,15 @@ function App() {
                 <Route path='/' element={<>
                   <Basket selectedAsteroids={selectedAsteroids} />
                   <DiameterSelection isDistance={isDistance}
-                    Change={(v: boolean) => setIsDistance(v)} />
+                    Change={(v: boolean) => setIsDistance(v)} 
+                    isDiameterHidden={isDiameterHidden}/>
                   <AsteroidsList isDistance={isDistance}
-                    selected={(x: any) => {
+                    selected={(x: asteroids) => {
                       let newVal = [...selectedAsteroids, x]; setSelectedAsteroids(newVal)
                       setIsOrderSend(false)
                     }}
                     selectedAsteroids={selectedAsteroids}
+                    isAsteroids={(x) => setIsDiameterHidden(x)}
                   /> </>} />
 
                 <Route path='/basket' element={<>
@@ -83,5 +87,3 @@ function App() {
 }
 
 export default App;
-
-

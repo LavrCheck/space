@@ -4,6 +4,13 @@ import asteroidSvg from '../Images/asteroid.svg'
 import { Button } from '../components/ui/Button'
 import alarmSvg from '../Images/alarm.svg'
 
+
+function isAsteroidBig(size: number) {
+    if (size > 250) { return { height: '50px', width: '50px' } }
+    else { return {} }
+}
+
+
 export function ListUnit({
     date,
     distance,
@@ -16,7 +23,7 @@ export function ListUnit({
     goInfo,
 }: {
     date: string
-    distance: number
+    distance: string
     name: string
     size: number
     isAlarm: boolean
@@ -26,11 +33,6 @@ export function ListUnit({
     isAsteroidSelected?: boolean
     goInfo?: () => void
 }) {
-
-    function isAsteroidBig() {
-        if (size > 250) { return { height: '50px', width: '50px' } }
-        else { return {} }
-    }
 
 
     return <>
@@ -47,7 +49,7 @@ export function ListUnit({
                     <img src={arrow} alt='arrow' />
                 </div>
                 <div className='AsteroidDiv'>
-                    <img style={isAsteroidBig()} src={asteroidSvg} alt='asteroid' />
+                    <img style={isAsteroidBig(size)} src={asteroidSvg} alt='asteroid' />
                 </div>
                 <div className='MiddleRight'>
                     <h4>{name}</h4>

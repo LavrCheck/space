@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react'
 import './DiameterSelection.sass'
 
 export function DiameterSelection({
     isDistance,
     Change,
     name = 'Ближайшие подлеты астероидов',
+    isDiameterHidden
 }: {
     isDistance?: boolean
     Change: (value: boolean) => void
     name?: string
+    isDiameterHidden?: boolean
 }) {
 
     const selectedStyle = { fontWeight: '700', textDecoration: 'unset' }
+
+    if(isDiameterHidden){return <></>}
 
     return <>
         <div className='DiameterSelection'>
