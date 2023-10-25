@@ -121,7 +121,6 @@ export function AsteroidsList({
       )
 
       const scrolledUntilEnd = (window.innerHeight + window.pageYOffset) >= scrollHeight - 1500
-      console.log(scrolledUntilEnd)
       if (scrolledUntilEnd) {
         startDate.setDate(startDate.getDate() + 3)
         endDate.setDate(endDate.getDate() + 3)
