@@ -2,6 +2,8 @@ import './InfoUnit.sass'
 import arrow from '../Images/arrow.svg'
 import speedSvg from '../Images/speed.svg'
 
+
+
 export function InfoUnit({
     orbit,
     date,
@@ -13,6 +15,7 @@ export function InfoUnit({
     distance: string
     speed: string
 }) {
+    
 
 
     return <>

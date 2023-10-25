@@ -3,7 +3,7 @@ import { getList } from '../api'
 import { ListUnit } from "./ListUnit"
 import './AsteroidList.sass'
 import { useNavigate } from "react-router-dom"
-import loadingGif from '../Images/loading.gif' 
+import { Loading } from "./ui/Loading"
 
 
 export type asteroids = {
@@ -77,7 +77,7 @@ const sortConvertDate = (date: string) => {
     .replace(' Дек ', '/12/')
 }
 
-const styleForLoading : CSSProperties = {
+export const styleForLoading : CSSProperties = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -120,7 +120,7 @@ export function AsteroidsList({
         document.body.clientHeight, document.documentElement.clientHeight
       )
 
-      const scrolledUntilEnd = (window.innerHeight + window.pageYOffset) >= scrollHeight - 100
+      const scrolledUntilEnd = (window.innerHeight + window.pageYOffset) >= scrollHeight - 1500
       console.log(scrolledUntilEnd)
       if (scrolledUntilEnd) {
         startDate.setDate(startDate.getDate() + 3)
@@ -136,7 +136,7 @@ export function AsteroidsList({
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }
-  })
+  },[])
 
   useEffect(() => {
     (async () => {
@@ -175,7 +175,7 @@ export function AsteroidsList({
           />
         ))
       }
-      <img src={loadingGif} alt="loading" className="loading" style={asteroids.length === 0 ? styleForLoading : {}}/>
+      <Loading isCenter={asteroids.length === 0 ? true : false}/>
     </div>
   )
 

@@ -6,7 +6,7 @@ import { convertLunar } from "./AsteroidsList"
 import { InfoUnit } from "./InfoUnit"
 import './Info.sass'
 import { DiameterSelection } from "./DiameterSelection"
-import loadingGif from '../Images/loading.gif'
+import { Loading } from "./ui/Loading"
 
 
 
@@ -22,9 +22,9 @@ function convertAllInfo(data: any): info[] {
     return data.close_approach_data.flat().map((x: any) => {
         return {
             date: convertDate(x.close_approach_date_full).split(' ').splice(0, 3).join(' '),
-            speed: x.relative_velocity.kilometers_per_hour + ' км/ч',
+            speed: Math.floor(x.relative_velocity.kilometers_per_hour).toLocaleString() + ' км/ч',
             orbit: convertOrbit(x.orbiting_body),
-            distanceKm: x.miss_distance.kilometers.split('.')[0] + ' км',
+            distanceKm: Math.floor(x.miss_distance.kilometers).toLocaleString() + ' км',
             distanceLun: convertLunar(Number(x.miss_distance.lunar.split('.')[0])),
         }
     })
@@ -50,12 +50,13 @@ export function Info() {
 
     useEffect(() => {
         setIsLoading(true)
-        getUnit(id).then((data) => { setAllInfo((convertAllInfo(data))); setIsLoading(false) })
+        getUnit(id).then((data) => { setAllInfo((convertAllInfo(data)))
+        setIsLoading(false) })
     }, [id])
 
-    if (isLoading) { return <img className="loading" src={loadingGif} alt="Loading" /> }
+    if (isLoading) { return <Loading isCenter={true} /> }
 
-    
+
 
     return <>
         <div className="Info">

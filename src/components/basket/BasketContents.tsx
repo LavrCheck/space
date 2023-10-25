@@ -1,6 +1,9 @@
-import './BasketContents.sass';
-import { ListUnit } from '../ListUnit';
-import { Button } from '../ui/Button';
+import './BasketContents.sass'
+import { ListUnit } from '../ListUnit'
+import { Button } from '../ui/Button'
+import { useNavigate } from 'react-router-dom'
+
+
 
 export function BasketContents({
   selectedAsteroids,
@@ -13,6 +16,8 @@ export function BasketContents({
   isDistance: boolean
   sendOrder: () => void
 }) {
+  
+  const navigate = useNavigate()
 
 
 
@@ -29,6 +34,7 @@ export function BasketContents({
             choice={() => remove(x.name)}
             active={false}
             childrenButton={'УДАЛИТЬ'}
+            goInfo={() => navigate(`/info/${x.id}`)}
           />
         ))}
         <div className='buttonsContainer'>

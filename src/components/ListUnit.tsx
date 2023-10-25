@@ -5,10 +5,12 @@ import { Button } from '../components/ui/Button'
 import alarmSvg from '../Images/alarm.svg'
 
 
+
 function isAsteroidBig(size: number) {
     if (size > 250) { return { height: '50px', width: '50px' } }
     else { return {} }
 }
+
 
 
 export function ListUnit({
@@ -31,10 +33,11 @@ export function ListUnit({
     active?: boolean
     childrenButton: string
     isAsteroidSelected?: boolean
-    goInfo?: () => void
+    goInfo: () => void
 }) {
 
 
+    
     return <>
         <div className='ListUnit'>
             <div className='TopInfo'>
