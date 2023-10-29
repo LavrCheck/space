@@ -34,5 +34,16 @@
         background-color: darken($orange, 20)
         cursor: unset
 
-        &:active
-            color: $white
+    &.isBack
+        border-radius: 50%
+        height: 50px
+        width: 50px
+        position: fixed
+        top: 20px
+        left: 20px
+
+        @media (max-width: 400px)
+            display: none
+
+        img
+            height: 25px   

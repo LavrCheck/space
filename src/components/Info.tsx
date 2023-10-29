@@ -7,6 +7,7 @@ import { InfoUnit } from "./InfoUnit"
 import './Info.sass'
 import { DiameterSelection } from "./DiameterSelection"
 import { Loading } from "./ui/Loading"
+import { Button } from "./ui/Button"
 
 
 
@@ -75,6 +76,7 @@ export function Info() {
                     />
                 })}
             </div>
+            <Button isBackButton={true}/>
         </div>
     </>
 

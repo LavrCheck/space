@@ -9,6 +9,7 @@ import { DiameterSelection } from './components/DiameterSelection'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Info } from './components/Info'
 import { asteroids } from './components/AsteroidsList'
+import { Button } from './components/ui/Button'
 
 
 
@@ -54,6 +55,7 @@ function App() {
                   /> </>} />
 
                 <Route path='/basket' element={<>
+                  <Button isBackButton={true} />
                   {!isOrderSend ? (
                     <>
                       {selectedAsteroids.length !== 0 ? (
