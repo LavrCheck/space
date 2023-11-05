@@ -105,7 +105,7 @@ export function AsteroidsList({
 
   const startDate = new Date()
   const endDate = new Date()
-  endDate.setDate(endDate.getDate() - 3)
+  endDate.setDate(endDate.getDate() + 3)
 
   let scrollHandlerLock = useRef(false)
   useEffect(() => {
