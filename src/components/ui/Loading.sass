@@ -8,10 +8,23 @@
 
     width: 75px
     aspect-ratio: 1/1
-    max-width: 350px
-    margin: auto
+    margin-left: 115px 
     margin-bottom: 10px
     animation: rotate 4s linear infinite
+
+    &.isCenter
+        @keyframes rotateCenter
+            0%
+                transform: translate(-50%, -50%) rotate(0deg)
+            100%
+                transform: translate(-50%, -50%)  rotate(359deg)
+        
+        position: absolute
+        top: 50%
+        left: 50%
+        animation: rotateCenter 4s linear infinite
+        margin: 0px
+
     
     @media (max-width: 850px)
         margin-bottom: 90px

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, CSSProperties } from "react"
+import React, { useState, useEffect, useRef, CSSProperties, useMemo } from "react"
 import { getList } from '../api'
 import { ListUnit } from "./ListUnit"
 import './AsteroidList.sass'
@@ -78,11 +78,12 @@ const sortConvertDate = (date: string) => {
     .replace(' Дек ', '/12/')
 }
 
-export const styleForLoading : CSSProperties = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+const sortAsteroids = (asteroids: asteroids[]) => { 
+  return asteroids.sort((x, y) => {
+    const dateX = new Date(sortConvertDate(x.maxApproachDate))
+    const dateY = new Date(sortConvertDate(y.maxApproachDate))
+    return dateX.getTime() - dateY.getTime()
+  })
 }
 
 
@@ -104,7 +105,7 @@ export function AsteroidsList({
 
   const startDate = new Date()
   const endDate = new Date()
-  endDate.setDate(endDate.getDate() + 3)
+  endDate.setDate(endDate.getDate() - 3)
 
   let scrollHandlerLock = useRef(false)
   useEffect(() => {
@@ -126,7 +127,7 @@ export function AsteroidsList({
         startDate.setDate(startDate.getDate() + 3)
         endDate.setDate(endDate.getDate() + 3)
         const data = await getList(startDate, endDate)
-        setAsteroids(prevAster => [...prevAster, ...convertList(data)])
+        setAsteroids(prevAster => [...prevAster, ...sortAsteroids(convertList(data))])
       }
 
       scrollHandlerLock.current = false
@@ -141,17 +142,11 @@ export function AsteroidsList({
   useEffect(() => {
     (async () => {
       let data = await getList(startDate, endDate)
-      setAsteroids(convertList(data))
+      setAsteroids(sortAsteroids(convertList(data)))
     })()
   },[])
 
   const navigate = useNavigate()
-
-  asteroids.sort((x, y) => {
-    const dateX = new Date(sortConvertDate(x.maxApproachDate))
-    const dateY = new Date(sortConvertDate(y.maxApproachDate))
-    return dateX.getTime() - dateY.getTime()
-  })
   
   
 
